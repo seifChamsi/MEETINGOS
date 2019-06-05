@@ -8,7 +8,6 @@ export class Home extends Component {
         return(
             
     <div className="container text-center">
-        Hello {user}
       <div className="row justify-content-center">
         <div className="col-10 col-md-10 col-lg-8 col-xl-7 border border-primary rounded mt-2">
           <div className="display-4  text-danger mt-4 mb-4">
@@ -28,16 +27,24 @@ export class Home extends Component {
             way to learn <a href="https://reactjs.org/">React</a> 
             with <a href="https://firebase.google.com">Firebase</a>.
           </p>
-    
-          <a href="/register" className="btn btn-outline-primary mr-2 mb-4">
-            Register
-          </a>
-          <a href="/login" className="btn btn-outline-primary mr-2 mb-4">
-            Log In
-          </a>
-          <a href="/meetings" className="btn btn-primary mb-4">
-            Meetings
-          </a>
+            {user == null &&(
+                <span>
+                <a href="/register" className="btn btn-outline-primary mr-2 mb-4">
+                Register
+                </a>
+                <a href="/login" className="btn btn-outline-primary mr-2 mb-4">
+                Log In
+                 </a>
+                </span>
+            )}
+         {user &&(
+             <span>
+                 <a href="/meetings" className="btn btn-primary mb-4">
+                    Meetings
+            </a>
+             </span>
+         )}
+          
         </div> 
       </div>
     </div>
