@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-
+import {Link} from '@reach/router';
 
 export class Home extends Component {
     
@@ -16,32 +16,32 @@ export class Home extends Component {
           <p className="lead">
             MEETINGO is a Single Page Application it's able to :
             <ul className="list-unstyled">
-              <li><strong>Create</strong> meetings</li>
-              <li><strong>Check in</strong> for people</li>
-              <li><strong>Pick</strong> random people to award giveaways</li>
+              <li><span className="text-primary font-weight-bold pl-1">Create</span> meetings</li>
+              <li><span className="text-primary font-weight-bold pl-1">Check in</span> for people</li>
+              <li><span className="text-primary font-weight-bold pl-1">Pick</span> random people to award giveaways</li>
             
             </ul>
             it's a
             good example of a Single Page Application which includes
             connection to a database and routing. It's a practical
-            way to learn <a href="https://reactjs.org/">React</a> 
-            with <a href="https://firebase.google.com">Firebase</a>.
+            way to learn <a to="https://reactjs.org/">React</a> 
+            with <a to="https://firebase.google.com">Firebase</a>.
           </p>
             {user == null &&(
                 <span>
-                <a href="/register" className="btn btn-outline-primary mr-2 mb-4">
+                <Link to="/register" className="btn btn-outline-primary mr-2 mb-4">
                 Register
-                </a>
-                <a href="/login" className="btn btn-outline-primary mr-2 mb-4">
+                </Link>
+                <Link to="/login" className="btn btn-outline-primary mr-2 mb-4">
                 Log In
-                 </a>
+                 </Link>
                 </span>
             )}
          {user &&(
              <span>
-                 <a href="/meetings" className="btn btn-primary mb-4">
+                 <Link to="/meetings" className="btn btn-primary mb-4">
                     Meetings
-            </a>
+            </Link>
              </span>
          )}
           

@@ -9,8 +9,8 @@ export class Navigation extends Component {
        
         <nav className="site-nav family-sans navbar navbar-expand bg-primary navbar-dark higher">
         <div className="container-fluid">
-            <a to="/" className="navbar-brand">
-            <FaMeetup className="fa fa-3x mr-1 text-bold "/>Meetingo
+            <a href="/" className="navbar-brand">
+            <FaMeetup className="fa fa-3x mr-1 "/>Meetingo
             </a>
             <div className="navbar-nav ml-auto">
                 {user &&(

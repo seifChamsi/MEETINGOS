@@ -1,5 +1,6 @@
 // Import React
 import React, { Component } from 'react';
+import firebase from "./Firebase"
 import { Home } from "./Home";
 import { Welcome } from "./Welcome";
 import { Navigation } from "./Navigation";
@@ -14,8 +15,18 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      user : "saif"
+      user : null
     }
+  }
+
+  componentDidMount(){
+    //select the user refernce in the firebase database
+    const ref = firebase.database().ref('user');
+    //event to update the state into the user value
+    ref.on('value', snapshot=>{
+      let FBUSER = snapshot.val();
+      this.setState({user : FBUSER})
+    })
   }
 
   render() {
