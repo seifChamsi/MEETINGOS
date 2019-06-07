@@ -5,8 +5,8 @@ import firebase from "./Firebase"
 
 export class Register extends Component {
  
-    constructor(){
-      super();
+    constructor(props){
+      super(props);
       this.state = {
         displayName : '',
         email : '',
@@ -41,12 +41,13 @@ export class Register extends Component {
       }
       e.preventDefault();
       //Push data into firebase
-      firebase.
-      auth().
-      createUserWithEmailAndPassword(
+      firebase.auth().createUserWithEmailAndPassword(
         registrationInfo.email,
         registrationInfo.passOne
-      ).catch(error =>{
+      ).then(()=>{
+        this.props.registerUser(registrationInfo.displayName);
+      })
+      .catch(error =>{
         if (error.message !== null) {
           this.setState({errorMessage : error.message})
         } else {
@@ -132,7 +133,7 @@ export class Register extends Component {
                       <FormError msg={this.state.errorMessage}/>
                     ): null}
 
-                    {(this.state.passOne === this.state.passTwo && this.state.passOne!="" && this.state.passTwo!="") ?(
+                    {(this.state.passOne === this.state.passTwo && this.state.passOne!=="" && this.state.passTwo!=="") ?(
                       <FormOK msg="The Two passwords Match Correctly"/>
                     ): null}
                   </div>

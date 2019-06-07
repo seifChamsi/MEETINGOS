@@ -8,14 +8,16 @@ import { Login } from "./Login";
 import { Meetings } from "./Meetings";
 import { Register } from "./Register";
 
-import {Router} from '@reach/router';
+import {Router, navigate} from '@reach/router';
 
 
 class App extends Component {
   constructor(){
     super();
     this.state = {
-      user : null
+      user : null,
+      displayName : null,
+      userID : null
     }
   }
 
@@ -29,17 +31,30 @@ class App extends Component {
     })
   }
 
+  registerUser = (userName) =>{
+    firebase.auth().onAuthStateChanged(FBUSER =>{
+      FBUSER.updateProfile({
+        displayName : userName
+      }).then(()=>{
+        this.setState({user:FBUSER,
+        displayName:FBUSER.displayName,
+        userID : FBUSER.uid
+      })
+      navigate('/meetings')
+      })
+    })
+  }
   render() {
     return (
       <div>
         <Navigation user={this.state.user}/>
-        {this.state.user &&<Welcome user={this.state.user}/>}
+        {this.state.user &&<Welcome user={this.state.displayName}/>}
         
         <Router>
               <Home path="/" user={this.state.user}/>
               <Login path="/login"/>
               <Meetings path="/meetings"/>
-              <Register path="/register"/>
+              <Register path="/register" registerUser={this.registerUser} />
         </Router>
          
       </div>
