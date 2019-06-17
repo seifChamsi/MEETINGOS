@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {FaMeetup,FaSignOutAlt,FaUsers} from 'react-icons/fa';
+import {FaMeetup,FaSignOutAlt,FaUsers, FaFontAwesomeLogoFull} from 'react-icons/fa';
 import {Link} from '@reach/router';
 
 export class Navigation extends Component {
   render() {
-    const {user} = this.props
+    const {user,logout} = this.props
     return (
        
         <nav className="site-nav family-sans navbar navbar-expand bg-primary navbar-dark higher">
@@ -32,7 +32,8 @@ export class Navigation extends Component {
                )} 
                 
                 {user&&(
-                     <Link className="nav-item nav-link" to="/login">
+                     <Link className="nav-item nav-link" to="/login" 
+                     onClick={e=>logout(e)} >
                      <FaSignOutAlt className="mr-1"/>log out
                      </Link>
                 )}

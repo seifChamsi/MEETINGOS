@@ -22,13 +22,15 @@ class App extends Component {
   }
 
   componentDidMount(){
-    //select the user refernce in the firebase database
-    const ref = firebase.database().ref('user');
-    //event to update the state into the user value
-    ref.on('value', snapshot=>{
-      let FBUSER = snapshot.val();
-      this.setState({user : FBUSER})
-    })
+   firebase.auth().onAuthStateChanged(FBUSER=>{
+     if (FBUSER) {
+       this.setState({
+         user : FBUSER,
+         displayName  : FBUSER.displayName,
+         uid : FBUSER.uid
+       })
+     }
+   })
   }
 
   registerUser = (userName) =>{
@@ -43,12 +45,29 @@ class App extends Component {
       navigate('/meetings')
       })
     })
+  };
+
+logout = (e) => {
+    e.preventDefault();
+    this.setState({
+      displayName: null,
+      userID: null,
+      user : null
+    })
+
+    firebase.auth().signOut().then(
+      ()=>{
+        navigate('/login');
+      }
+    )
   }
+
   render() {
     return (
       <div>
-        <Navigation user={this.state.user}/>
-        {this.state.user &&<Welcome user={this.state.displayName}/>}
+        <Navigation user={this.state.user} logout={this.logout} />
+        {this.state.user &&<Welcome userName={this.state.displayName}
+        logout={this.logout} />}
         
         <Router>
               <Home path="/" user={this.state.user}/>
